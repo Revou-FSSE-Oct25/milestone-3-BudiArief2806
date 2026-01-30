@@ -9,7 +9,6 @@ export default function SignInPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<"user" | "admin">("user");
   const [msg, setMsg] = useState("");
 
   function handleSignIn(e: React.FormEvent) {
@@ -18,11 +17,10 @@ export default function SignInPage() {
     if (!email) return setMsg("Email wajib diisi.");
     if (!password) return setMsg("Password wajib diisi.");
 
-    setAuth({ email, role });
+    // Admin dihapus → selalu login sebagai user
+    setAuth({ email, role: "user" });
     setMsg("Login berhasil!");
-
-    if (role === "admin") router.push("/admin");
-    else router.push("/store");
+    router.push("/store");
   }
 
   return (
@@ -52,28 +50,8 @@ export default function SignInPage() {
                   text-white
                 "
               >
-                {/* Role */}
-                <label className="block text-sm font-semibold text-white/80">
-                  Role
-                </label>
-                <select
-                  className="
-                    mt-2 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2
-                    text-white outline-none focus:border-white/25
-                  "
-                  value={role}
-                  onChange={(e) => setRole(e.target.value as any)}
-                >
-                  <option className="text-slate-900" value="user">
-                    User
-                  </option>
-                  <option className="text-slate-900" value="admin">
-                    Admin
-                  </option>
-                </select>
-
                 {/* Email */}
-                <label className="mt-4 block text-sm font-semibold text-white/80">
+                <label className="block text-sm font-semibold text-white/80">
                   Email
                 </label>
                 <input
@@ -122,10 +100,8 @@ export default function SignInPage() {
 
                 {/* Small hint */}
                 <p className="mt-4 text-xs text-white/50">
-                  Demo: Pilih role{" "}
-                  <span className="text-white/80 font-semibold">Admin</span>{" "}
-                  untuk masuk ke{" "}
-                  <span className="text-white/80 font-semibold">/admin</span>.
+                  Demo: isi email & password bebas, lalu masuk ke{" "}
+                  <span className="text-white/80 font-semibold">Store</span>.
                 </p>
               </form>
             </div>
@@ -133,11 +109,9 @@ export default function SignInPage() {
 
           {/* RIGHT: Image / Illustration panel */}
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_12px_40px_rgba(15,23,42,0.08)]">
-            {/* Background gradient overlay (Biru Laut + Violet) */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#eaf2ff] via-white to-[#efe8ff]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(79,70,229,0.18),transparent_45%),radial-gradient(circle_at_90%_20%,rgba(124,58,237,0.18),transparent_40%),radial-gradient(circle_at_60%_90%,rgba(7,26,47,0.14),transparent_45%)]" />
 
-            {/* Content */}
             <div className="relative h-full p-8">
               <div className="max-w-md">
                 <p className="text-xs font-semibold tracking-[0.25em] text-slate-600">
@@ -155,11 +129,10 @@ export default function SignInPage() {
                   <span className="h-2 w-2 rounded-full bg-[#4f46e5]" />
                   <span>Secure sign-in</span>
                   <span className="h-1 w-1 rounded-full bg-slate-300" />
-                  <span>Role-based access</span>
+                  <span>Quick checkout</span>
                 </div>
               </div>
 
-              {/* Image (ganti src sesuai file kamu di /public) */}
               <div className="relative mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/40 bg-white/40 shadow-sm">
                 <Image
                   src="/signin-hero.png"
@@ -170,7 +143,6 @@ export default function SignInPage() {
                 />
               </div>
 
-              {/* Bottom badge */}
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-[#071a2f] px-4 py-2 text-xs font-bold text-white">
                   Navy
@@ -186,7 +158,6 @@ export default function SignInPage() {
           </div>
         </div>
 
-        {/* Mobile note: kalau belum punya gambar */}
         <p className="mt-6 text-xs text-slate-500">
           Pastikan kamu menaruh gambar di{" "}
           <span className="font-semibold">/public/signin-hero.png</span>. Kalau

@@ -6,31 +6,55 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/products/${product.id}`}
-      className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+      className="
+        group block rounded-3xl border border-slate-200 bg-white p-4
+        shadow-sm transition-all duration-300 ease-out
+        hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-200/70
+      "
     >
       {/* image area */}
-      <div className="relative h-44 w-full overflow-hidden rounded-xl bg-gradient-to-br from-slate-50 to-white">
+      <div className="relative h-52 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 to-white">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          className="object-contain p-5 transition duration-200 group-hover:scale-[1.03]"
+          className="
+            object-contain p-6
+            transition-transform duration-300 ease-out
+            group-hover:scale-110
+          "
           sizes="(max-width: 768px) 100vw, 25vw"
+        />
+
+        {/* overlay glow lembut */}
+        <div
+          className="
+          pointer-events-none absolute inset-0
+          bg-gradient-to-t from-black/5 to-transparent
+          opacity-0 transition duration-300
+          group-hover:opacity-100
+        "
         />
       </div>
 
       {/* text */}
-      <div className="mt-3">
+      <div className="mt-4">
         <p className="line-clamp-2 font-semibold text-slate-950">
           {product.title}
         </p>
 
-        <div className="mt-2 flex items-center justify-between">
+        <div className="mt-3 flex items-center justify-between">
           <p className="text-sm font-extrabold text-violet-700">
             ${product.price}
           </p>
 
-          <span className="text-xs text-slate-500 opacity-0 transition group-hover:opacity-100">
+          <span
+            className="
+            text-xs text-slate-500
+            opacity-0 transition duration-300
+            group-hover:opacity-100
+          "
+          >
             View →
           </span>
         </div>

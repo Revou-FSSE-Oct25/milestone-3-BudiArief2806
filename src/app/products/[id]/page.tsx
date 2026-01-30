@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/lib/types";
 import ProductClient from "./ProductClient";
@@ -30,12 +31,12 @@ export default async function ProductDetailPage({
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_30%_20%,rgba(139,94,60,0.18),transparent_50%),radial-gradient(circle_at_70%_25%,rgba(255,226,182,0.30),transparent_55%),radial-gradient(circle_at_50%_90%,rgba(80,45,28,0.16),transparent_55%)]" />
 
       <section className="mx-auto max-w-6xl px-6 py-8">
-        <a
+        <Link
           href="/"
           className="inline-flex items-center gap-2 rounded-full border border-[#2b1b12]/15 bg-[#fff7ea] px-4 py-2 text-sm font-semibold text-[#7a4a2a] shadow-sm hover:bg-[#fff0d9]"
         >
           ← Back to Home
-        </a>
+        </Link>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2 items-start">
           {/* Image card */}
